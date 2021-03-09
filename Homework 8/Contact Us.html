@@ -1,0 +1,78 @@
+<html>
+    <title>Contact Us</title>
+       <script>
+            function checkform()
+            {
+                var Name;
+                Name = document.getElementById("fName").value; 
+                if(Name == "")
+                {
+                    window.alert("name is required.");
+                    document.getElementById("fName").style.backgroundColor = "red";
+                    document.getElementById("fName").focus();
+                }
+                else
+                {
+                    document.getElementById("fName").style.backgroundColor = "white";
+                    window.alert("Name: " + Name); 
+                }
+            }
+            function checkform()
+            {
+                var Email;
+                Email = document.getElementById("fEmail").value; 
+                if(Email == "")
+                {
+                    window.alert("email is required.");
+                    document.getElementById("fEmail").style.backgroundColor = "red";
+                    document.getElementById("fEmail").focus();
+                }
+                else
+                {
+                    document.getElementById("fEmail").style.backgroundColor = "white";
+                    window.alert("Email: " + Email); 
+                }
+            }
+            function checkform()
+            {
+                var EsignatureagreetoTOS;
+                EsignatureagreetoTOS = document.getElementById("Esig").value; 
+                if( EsignatureagreetoTOS == "")
+                {
+                    window.alert("signature is required.");
+                    document.getElementById("Esig").style.backgroundColor = "red";
+                    document.getElementById("Esig").focus();
+                }
+                else
+                {
+                    document.getElementById("Esig").style.backgroundColor = "white"; 
+                }
+            }
+       </script>
+    <head></head>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <body style="background-color:rgb(143, 228, 209);">
+        <h1>Contact Us</h1>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="fName"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" id="fEmail"></td>
+            </tr>
+            <tr>
+                <td>E-signature(agree to TOS)</td>
+                <td><input type="text" id="Esig"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><button id="bSubmit" onclick="checkform()">submit</button>
+            </tr>
+            <h3>All Must be completed</h3>
+        </table>
+        <p><a href="file:///C:/Users/14068/Desktop/Website/Homepage.html">Home Page</a></p>
+        
+    </body>
+</html>
