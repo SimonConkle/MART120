@@ -3,167 +3,101 @@ var characterX = 100;
 var characterY = 100;
 
 // wasd
-var w = 87; 
+var w = 87;
 var s = 83;
 var a = 65;
 var d = 68;
 
-// shape 1
+// shapes
 var shapeX = 30;
 var shapeY = 50;
-var shapeXSpeed;
-var shapeYSpeed;
 
-// shape 2
-var shapeW = 60;
-var shapeZ = 80;
-var shapeWSpeed;
-var shapeZSpeed;
+var shapeXs = [];
+var shapeYs = [];
+var diameters = [];
+
+var shapeXSpeeds = [];
+var shapeYSpeeds = [];
 
 // mouse click shape
 var mouseShapeX;
 var mouseShapeY;
-function setup()
-{
+
+function setup() {
     createCanvas(500, 600);
-    shapeXSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
-    shapeYSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
-    shapeWSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
-    shapeZSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+    // ranadom speed
+    var x = 50;
+    var y = 50;
+    var diameter = 25;
+    for (var i = 0; i < 10; i++) {
+        shapeXSpeeds[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+        shapeYSpeeds[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+        shapeXs[i] = getRandomNumber(500);
+        shapeYs[i] = getRandomNumber(600);
+        diameters[i] = getRandomNumber(30);
+    }
+
+    createCharacter(200, 350);
 }
 
-function draw()
-    {background(100,150,20);
+function draw() {
+    background(100,150,20);
 
     // call createBorders function
     createBorders();
 
-    // call createCharacter function
-    createCharacter();
-
     // call movePlayer function
     movePlayer();
-
-    // call drawMouseclick function
-    drawMouseclick();
-
-    // call createEnemy function
-    createEnemy();
-
-    // call createRandoMmovment function
-    createRandoMmovment();
-
-    // call createWin function
-    createWin();
 
     // exit message
     textSize(25);
     text("Exit", width-470,height-25)
 
+    // call createCharacter function
+    createCharacter();
+
+    // call createWin function
+    createWin();
+    
+    // create shapes
+    for (var i = 0; i < shapeXs.length; i++) {
+    {
+        circle(shapeXs[0],shapeYs[0], diameters[0]);
+        fill(100,80,70)
+        circle(shapeXs[1],shapeYs[1], diameters[1]);
+        fill(20,30,60)
+        circle(shapeXs[2],shapeYs[2], diameters[2]);
+        fill(50,75,90)
+        circle(shapeXs[3],shapeYs[3], diameters[3]);
+        fill(10,20,20)
+        circle(shapeXs[4],shapeYs[4], diameters[4]);
+        fill(80,100,70)
+    }
+        shapeXSpeeds[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+        shapeYSpeeds[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+    
+    // shape movement 
+        shapeXs[i] += shapeXSpeeds[i];
+        shapeYs[i] += shapeYSpeeds[i];
+
+    // check to see if the shape has gone out of bounds
+        if (shapeXs[i] > width) {
+            shapeXs[i] = 0;
+        }
+        if (shapeXs[i] < 0) {
+            shapeXs[i] = width;
+        }
+        if (shapeYs[i] > height) {
+            shapeYs[i] = 0;
+        }
+        if (shapeYs[i] < 0) {
+            shapeYs[i] = height;
+        }
+    }
    
-    // enemy shapes
-    {circle(shapeX, shapeY, 10);
-        fill(50,25,10)
-    }
-    {circle(shapeW, shapeZ, 20);
-        fill(40,50,20)
-    }
-
-    // shape 1 out of bounds
-    if(shapeX > width)
-    {
-        shapeX = 0;
-    }
-    if(shapeX < 0)
-    {
-        shapeX = width;
-    }
-    if(shapeY > height)
-    {
-        shapeY = 0;
-    }
-    if(shapeY < 0)
-    {
-        shapeY = height;
-    }
-
-    // shape 2 out of bounds
-    if(shapeW > width)
-    {
-        shapeW = 0;
-    }
-    if(shapeW < 0)
-    {
-        shapeW = width;
-    }
-    if(shapeZ > height)
-    {
-        shapeZ = 0;
-    }
-    if(shapeZ < 0)
-    {
-        shapeZ = height;
-    }
-
-}
-
-function createEnemy()
-{
-    {circle(shapeX, shapeY, 10);
-        fill(50,25,10)
-    }
-    {circle(shapeW, shapeZ, 20);
-        fill(40,50,20)
-    }
-}
-
-function createRandoMmovment()
-{
-    shapeX += shapeXSpeed;
-    shapeY += shapeYSpeed;
-    shapeW += shapeWSpeed;
-    shapeZ += shapeZSpeed;
-} 
-
-function createWin()
-{
-    if(characterY > width && characterX < width-500)
-    {
-        stroke(5);
-        fill(0);
-        textSize(50);
-        text("You Win!", width/2-20, height/2-25);
-    }
-}
-
-function mouseClicked()
-{
-    mouseShapeX = mouseX;
-    mouseShapeY = mouseY;
-}
-
-function createCharacter()
-{
-    fill(60,30,90);
-    circle(characterX,characterY,25);
-}
-
-function createBorders()
-{
-    // top border
-    rect(0,0,width,10);
-    // left border
-    rect(0,0,10,height-50);
-    // bottom border
-    rect(0, height-10,width, 10);
-    // right upper border
-    rect(width-10,0,10,height); 
-}
-
-function drawMouseclick()
-{
-    fill(100,100,100);
-    circle(mouseShapeX, mouseShapeY, 30);
+    // create the shape based on the mouse click
+    fill(120, 130, 140);
+    circle(mouseShapeX, mouseShapeY, 25);
 }
 
 function movePlayer()
@@ -186,18 +120,40 @@ function movePlayer()
     }
 
 }
+function createCharacter()
+{
+    fill(60,30,90);
+    circle(characterX,characterY,25);
+}
 
-function keyPressed() {
-    if (keyCode === LEFT_ARROW) {
-        characterX -= 10;
-    } 
-    else if (keyCode === RIGHT_ARROW) {
-        characterX += 10;
+function createWin()
+{
+    if(characterY > width && characterX < width-500)
+    {
+        stroke(5);
+        fill(0);
+        textSize(50);
+        text("You Win!", width/2-20, height/2-25);
     }
-    else if (keyCode === UP_ARROW) {
-        characterY -= 10;
-    }
-    else if (keyCode === DOWN_ARROW) {
-        characterY += 10;
-    }
-  }
+}
+
+function createBorders()
+{
+    // top border
+    rect(0,0,width,10);
+    // left border
+    rect(0,0,10,height-50);
+    // bottom border
+    rect(0, height-10,width, 10);
+    // right upper border
+    rect(width-10,0,10,height); 
+}
+
+function mouseClicked() {
+    mouseShapeX = mouseX;
+    mouseShapeY = mouseY;
+}
+
+function getRandomNumber(number) {
+    return Math.floor(Math.random() * number) + 10;
+}
